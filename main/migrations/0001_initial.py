@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Категории',
                 'ordering': ('name',),
             },
-        ),
+        ),  
         migrations.CreateModel(
             name='Product',
             fields=[
