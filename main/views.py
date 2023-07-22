@@ -10,9 +10,9 @@ def index(request):
    }
    return render(request, "main/index.html", context)
 
-def contacts(request):
+def products(request):
    products_list = Product.objects.all()
    context = {
       'object_list':products_list
    }
-   return render(request, "main/contacts.html", context)
+   return render(request, "main/products.html", context) 
