@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Category, Product
+from main.models import Blog, Category, Product
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -8,3 +8,7 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
    list_display = ('name', 'description')
+
+@admin.register(Blog)
+class CategoryAdmin(admin.ModelAdmin):
+   list_display = ('header', 'slug', 'content', 'date_creation', 'is_publication', 'number_of_views')

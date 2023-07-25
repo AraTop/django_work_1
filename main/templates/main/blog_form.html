@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %} 
+{% block content %} 
+<form method = 'POST'>
+   {% csrf_token %}
+   <div class="form-group has-success">
+     <label class="control-label" for="inputSuccess1">Заголовок</label>
+     <input type="name" name="header" class="form-control" id="inputSuccess1">
+   </div>
+   <div class="form-group has-error">
+     <label class="control-label" for="inputError1">Cодержимое</label>
+     <input type="message" name="content" class="form-control" id="inputError1">
+   </div>
+   <div class="form-group has-success">
+      <label class="control-label" for="inputSuccess1">Превью:</label>
+      <input type="file" name="preview" id="fileInput" accept="image/*">
+    </div>
+    <div class="form-group has-warning">
+      <label class="control-label" for="inputWarning1">Дата создания</label>
+      <input type="time" name="date_creation" class="form-control" id="inputWarning1">
+    </div>
+    <div class="form-group has-error">
+      <label class="control-label" for="inputError1">Опубликовано</label>
+      <br>
+      <input type="radio" name="is_publication" value="1"> Да
+      <input type="radio" name="is_publication" value="Нет"> Нет
+    </div>
+   <div class="form-group has-error">
+      <label class="control-label" for="inputError1"></label>
+      <input type="submit" class="btn btn-primary" id="inputError1">
+ </form>
+{% endblock %} 

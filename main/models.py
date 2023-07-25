@@ -31,3 +31,20 @@ class Category(models.Model):
       verbose_name = 'Категория'
       verbose_name_plural = 'Категории'
       ordering = ('name',)
+
+class Blog(models.Model):
+   header = models.CharField(max_length=100, verbose_name='заголовок')
+   slug = models.CharField(max_length=100, verbose_name='slug', **NULLABLE)
+   content = models.CharField(max_length=250, verbose_name='Cодержимое')
+   preview = models.ImageField(upload_to='blogs/', **NULLABLE, verbose_name='превью ')
+   date_creation = models.TimeField(verbose_name='Дата создания', **NULLABLE)
+   is_publication = models.BooleanField(verbose_name='Опубликовано')
+   number_of_views = models.IntegerField(verbose_name='Просмотры', **NULLABLE, default=0)
+
+   def __str__(self):
+      return f'{self.header} {self.slug} {self.content} {self.date_creation} {self.is_publication} {self.number_of_views}' 
+   
+   class Meta:
+      verbose_name = 'Статья'
+      verbose_name_plural = 'Статьи'
+      ordering = ('header',)
