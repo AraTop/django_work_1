@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}     
 {% block content %}
   
-<input class="btn btn-success mb-4" type="submit" value="Добавить продукты" id="add-article-btn" style="position: absolute; top: 28%; left: 18.3%;">
+<input onclick="window.location.href='/create'" class="btn btn-success mb-4" type="submit" value="Добавить продукт" id="add-article-btn" style="position: absolute; top: 28%; left: 18.3%;">
    
             {% for object in object_list %}
             <div class="col-md-4">
@@ -11,9 +11,9 @@
                   <p class="card-text">Описание: {{object.description|truncatechars:100}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <button onclick="window.location.href='/product/{{object.pk}}'" type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button onclick="window.location.href='/update/{{object.pk}}'" type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button onclick="window.location.href='/delete/{{object.pk}}'" type="button" class="btn btn-danger">Delete</button>
                     </div>
                   </div>
                 </div>

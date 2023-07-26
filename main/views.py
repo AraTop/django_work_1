@@ -4,16 +4,6 @@ from django.views.generic import ListView, DetailView , View, CreateView, Update
 from main.models import Blog, Product
 from pytils.translit import slugify
 
-class ProductListView(ListView):
-   model = Product
-
-class ProductsListView(ListView):
-   model = Product
-   template_name = 'main/products_list.html'
-
-class ProductDetailView(DetailView):
-   model = Product
-
 class ContactView(View):
    template_name = 'main/contacts.html'
 
@@ -74,3 +64,31 @@ class BlogsUpdateView(UpdateView):
 class BlogsDeleteView(DeleteView):
    model = Blog
    success_url = '/blog/' 
+
+class ProductCreateView(CreateView):
+   model = Product
+   fields = ('name', 'description', 'preview', 'category', 'purchase_price', 'date_of_creation', 'last_modified_date')
+   success_url = '/' 
+
+class ProductDeleteView(DeleteView):
+   model = Product
+   success_url = '/' 
+
+class ProductListView(ListView):
+   model = Product
+
+class ProductsListView(ListView):
+   model = Product
+   template_name = 'main/products_list.html'
+
+class ProductDetailView(DetailView):
+   model = Product
+
+class ProductUpdateView(UpdateView):
+   model = Product
+   fields = ('name', 'description', 'preview', 'category', 'purchase_price', 'date_of_creation', 'last_modified_date')
+   success_url = '/'
+
+   def get_success_url(self):
+      return reverse('main:product', args=[self.kwargs.get('pk')])
+ 
