@@ -84,6 +84,12 @@ class ProductsListView(ListView):
 class ProductDetailView(DetailView):
    model = Product
 
+   def get_object(self, queryset=None):
+      self.object = super().get_object(queryset)
+      self.object.number_of_views += 1
+      self.object.save()
+      return self.object
+   
 class ProductUpdateView(UpdateView):
    model = Product
    fields = ('name', 'description', 'preview', 'category', 'purchase_price', 'date_of_creation', 'last_modified_date')

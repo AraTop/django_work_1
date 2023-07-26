@@ -14,6 +14,7 @@
                   <p class="card-text">Категория: {{object.category}}</p> 
                   <p class="card-text">Дата создания: {{object.date_of_creation}}</p> 
                   <p class="card-text">Дата последнего изменения: {{object.last_modified_date}}</p>
+                  <p class="card-text">Просмотры: {{object.number_of_views}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/update/{{ object.pk }}'">Edit</button>
