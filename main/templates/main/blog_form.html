@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %} 
 {% block content %} 
-<form method = 'POST'>
+<form method="POST" enctype="multipart/form-data">
    {% csrf_token %}
    <div class="form-group has-success">
      <label class="control-label" for="inputSuccess1">Заголовок</label>
