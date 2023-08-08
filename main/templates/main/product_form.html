@@ -1,37 +1,78 @@
 {% extends 'main/base.html' %} 
 {% block content %} 
-<form method="POST" enctype="multipart/form-data">
-   {% csrf_token %}
-   <div class="form-group has-success">
-     <label class="control-label" for="inputSuccess1">Название</label>
-     <input type="name" name="name" class="form-control" id="inputSuccess1">
-   </div>
-   <div class="form-group has-error">
-     <label class="control-label" for="inputError1">Описание</label>
-     <input type="message" name="description" class="form-control" id="inputError1">
-   </div>
-   <div class="form-group has-success">
-      <label class="control-label" for="inputSuccess1">Превью:</label>
-      <input type="file" name="preview" id="fileInput" accept="image/*">
-   </div>
-   <div class="form-group has-warning">
-      <label class="control-label" for="inputWarning1">Категория</label>
-      <input type="name" name="category" class="form-control" id="inputWarning1">
-   </div>
-   <div class="form-group has-error">
-      <label class="control-label" for="inputError1">Цена за покупку</label>
-      <input type="number" name="purchase_price">
-   </div>
-   <div class="form-group has-error">
-      <label class="control-label" for="inputError1">Дата создания</label>
-      <input type="time" name="date_of_creation"> 
-   </div>
-   <div class="form-group has-error">
-      <label class="control-label" for="inputError1">Дата последнего изменения</label>
-      <input type="time" name="last_modified_date">
-   </div>
-   <div class="form-group has-error">
-      <label class="control-label" for="inputError1"></label>
-      <input type="submit" class="btn btn-primary" id="inputError1">
- </form>
+<div class="col-12">
+   <form method="POST" enctype="multipart/form-data">
+      <div class="col-6">
+         <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                  Продукт
+               </h2>
+            </div>
+            <div class="card-header">
+               {% csrf_token %}
+               <style>
+                  .errors {
+                     color: red; 
+                     font-weight: bold; 
+                  }
+               </style>
+               {% if form.errors %}
+               <div class="errors">
+                  <ul>
+                     {% for field_name, errors in form.errors.items %}
+                        {% for error in errors %}
+                              <li>{{ error }}</li>
+                        {% endfor %}
+                     {% endfor %}
+                  </ul>
+               </div>
+               {% endif %}
+               <div class="card-body">
+                  <label class="control-label" for="inputSuccess1">Название</label>
+                  <input type="name" name="name" class="form-control" id="inputSuccess1">
+
+                  <label class="control-label" for="inputError1">Описание</label>
+                  <input type="message" name="description" class="form-control" id="inputError1">
+                  <br>
+                  <label class="control-label mb-2" for="inputSuccess1">Превью:</label>
+                  <input type="file" name="preview" id="fileInput" accept="image/*">
+                     <br>
+                  <label class="control-label" for="inputWarning1">Категория</label>
+                  <input type="name" name="category" class="form-control" id="inputWarning1">
+                     <br>
+                  <label class="control-label" for="inputError1">Цена за покупку</label>
+                  <input type="number" name="purchase_price">
+                     <br>
+                  <label class="control-label " for="inputError1">Дата создания</label>
+                  <input type="time" name="date_of_creation"> 
+                  <br>
+                  <label class="control-label" for="inputError1">Дата последнего изменения</label>
+                  <input type="time" name="last_modified_date">
+                     <br>
+                  <input type="submit" class="btn btn-primary" id="inputError1">
+               </div>  
+            </div>   
+         </div>      
+      </div>
+      <div style="position: absolute; top: 0; right: 0;">
+         <div class="card">
+            <div class="card-header">
+               <h2 class="card-title">
+                  Версии продукта
+               </h2>
+            </div>
+            <div class="card-body">
+               {{ formset.management_form }}
+               {% for form in formset.forms %}
+                  {{ form.as_p }}
+                  <hr>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+
+
 {% endblock %} 
