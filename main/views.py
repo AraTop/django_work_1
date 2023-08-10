@@ -1,5 +1,5 @@
 from django.forms import inlineformset_factory
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView , View, CreateView, UpdateView, DeleteView
 from main.forms import ProductForm, VersionForm
@@ -93,33 +93,33 @@ class ProductDetailView(DetailView):
       return self.object
    
 class ProductUpdateView(UpdateView):
-   model = Product 
-   form_class = ProductForm
-   success_url = '/' 
+    model = Product
+    form_class = ProductForm
+    success_url = '/'
 
-   def get_success_url(self):
-      return reverse('main:product', args=[self.kwargs.get('pk')])
+    def get_success_url(self):
+        return reverse('main:product', args=[self.kwargs.get('pk')])
 
-   def get_context_data(self, **kwargs):
-      context_data = super().get_context_data(**kwargs)
-      VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
 
-      if self.request.method == 'POST':
-         context_data['formset'] = VersionFormset(self.request.POST, instance = self.object)
-      else:
-         context_data['formset'] = VersionFormset(instance = self.object)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
 
-      return context_data
+        return context_data
 
-   def form_valid(self, form):
-      formset = self.get_context_data()['formset']
-      self.object = form.save()
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
 
-      if formset.is_valid():
-         formset.instance = self.object
-         formset.save()
-      
-      return super().form_valid(form)
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
 
 #----------------------------------------------------------------------
 

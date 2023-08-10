@@ -30,25 +30,25 @@
                {% endif %}
                <div class="card-body">
                   <label class="control-label" for="inputSuccess1">Название</label>
-                  <input type="name" name="name" class="form-control" id="inputSuccess1">
+                  <input type="name" name="name" class="form-control" id="inputSuccess1" value='{{ object.name }}'>
 
                   <label class="control-label" for="inputError1">Описание</label>
-                  <input type="message" name="description" class="form-control" id="inputError1">
+                  <input type="message" name="description" class="form-control" id="inputError1" value='{{ object.description }}'>
                   <br>
                   <label class="control-label mb-2" for="inputSuccess1">Превью:</label>
-                  <input type="file" name="preview" id="fileInput" accept="image/*">
+                  <input type="file" name="preview" id="fileInput" accept="image/*" value='{{ object.preview }}'>
                      <br>
                   <label class="control-label" for="inputWarning1">Категория</label>
-                  <input type="name" name="category" class="form-control" id="inputWarning1">
+                  <input type="name" name="category" class="form-control" id="inputWarning1" value='{{ object.category }}'>
                      <br>
                   <label class="control-label" for="inputError1">Цена за покупку</label>
-                  <input type="number" name="purchase_price">
+                  <input type="number" name="purchase_price" value='{{ object.purchase_price }}'>
                      <br>
                   <label class="control-label " for="inputError1">Дата создания</label>
-                  <input type="time" name="date_of_creation"> 
+                  <input type="time" name="date_of_creation" value='{{ object.date_of_creation }}'> 
                   <br>
                   <label class="control-label" for="inputError1">Дата последнего изменения</label>
-                  <input type="time" name="last_modified_date">
+                  <input type="time" name="last_modified_date" value='{{ object.last_modified_date }}'>
                      <br>
                   <input type="submit" class="btn btn-primary" id="inputError1">
                </div>  
