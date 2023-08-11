@@ -1,8 +1,10 @@
 from django.db import models
+from users.models import User
 
 NULLABLE = {'null':True, 'blank':True}
 
 class Product(models.Model):
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
    name = models.CharField(max_length=100, verbose_name='Название')
    description = models.TextField(verbose_name='Описание')
    preview = models.ImageField(upload_to='products/', **NULLABLE)

@@ -49,7 +49,11 @@
                   <br>
                   <label class="control-label" for="inputError1">Дата последнего изменения</label>
                   <input type="time" name="last_modified_date" value='{{ object.last_modified_date }}'>
-                     <br>
+                  <br>
+                  {{ form.user.label_tag }}: {{ request.user }}
+                  <br>
+                  <input type="hidden" name="{{ form.user.name }}" value="{{ request.user.id }}"
+                  <br>
                   <input type="submit" class="btn btn-primary" id="inputError1">
                </div>  
             </div>   
