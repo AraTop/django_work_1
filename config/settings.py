@@ -139,9 +139,9 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/users/login/' 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 's4053036@gmail.com'
-EMAIL_HOST_PASSWORD = 'troechka123@vk.com'
+EMAIL_HOST = 'smtp.rambler.ru'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True 
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'dfgfdhasds13@rambler.ru'
+EMAIL_HOST_PASSWORD = 'yvG-kmc-x5J-aF6' 
