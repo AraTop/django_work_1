@@ -11,5 +11,6 @@ urlpatterns = [
    path('logout/', LogoutView.as_view(), name='logout'),
    path('register/', views.RegisterView.as_view(), name='register'),
    path('profile/', views.ProfileView.as_view(), name='profile'),
-   path('profile/genpassword/', views.generate_new_password, name='generate_new_password')
+   path('profile/genpassword/', views.generate_new_password, name='generate_new_password'),
+   path('verify/<slug:token>/', views.verify_email, name='verify_email')
 ]   

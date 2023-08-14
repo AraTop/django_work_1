@@ -18,4 +18,4 @@ urlpatterns = [
    path("update/<int:pk>/", views.ProductUpdateView.as_view()),
    path("version/delete/<int:pk>/", views.VersionDeleteView.as_view()),
    path("version/update/<int:pk>/", views.VersionUpdateView.as_view())
-]   
+]     

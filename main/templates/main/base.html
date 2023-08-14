@@ -37,16 +37,17 @@
                       <a class="text-white" href="http://127.0.0.1:8000/users/logout/">Выйти</a>
                     </details>
                   </li> 
+                  <li><a href="http://127.0.0.1:8000/contacts/" class="text-white">Контакты</a></li>
+                <li><a href="http://127.0.0.1:8000/blog/" class="text-white">Статьи</a></li>
+                
                 {% else %}
                   <li>
                     <details><summary class="text-white">Здравствуй, гость</summary>
                       <a  class="text-white" href="http://127.0.0.1:8000/users/login/">Войти</a>, <a class="text-white" href="http://127.0.0.1:8000/users/register">Зарегистрироватся</a>
                     </details>
                   </li>   
-                {% endif %}
-                <li><a href="http://127.0.0.1:8000/service/settings/" class="text-white">Настройка рассылки</a></li>
-                <li><a href="http://127.0.0.1:8000/service/message/" class="text-white">Сообщения</a></li>
-                <li><a href="http://127.0.0.1:8000/service/logs/" class="text-white">Логи</a></li>
+                  <li><a href="http://127.0.0.1:8000/contacts/" class="text-white">Контакты</a></li>
+                {% endif %} 
               </ul>
             </div>
           </div>
