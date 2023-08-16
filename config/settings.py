@@ -144,5 +144,5 @@ EMAIL_HOST = 'smtp.rambler.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True 
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'dfgfdhasds13@rambler.ru'
-EMAIL_HOST_PASSWORD = 'yvG-kmc-x5J-aF6' 
+EMAIL_HOST_USER = 'test_django_project@rambler.ru'
+EMAIL_HOST_PASSWORD = 'Ara321ara' 
