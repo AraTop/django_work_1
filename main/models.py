@@ -13,7 +13,8 @@ class Product(models.Model):
    date_of_creation = models.TimeField(verbose_name='дата создания',**NULLABLE)
    last_modified_date = models.TimeField(verbose_name='дата последнего изменения',**NULLABLE)
    number_of_views = models.IntegerField(verbose_name='Просмотры', **NULLABLE, default=0)
-
+   is_active = models.BooleanField(default=True, verbose_name='Активен')
+   
    def __str__(self):
       return f'{self.name} {self.description} {self.category} {self.purchase_price} {self.date_of_creation} {self.last_modified_date}' 
    

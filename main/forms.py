@@ -1,7 +1,6 @@
 from django import forms
 from main.models import Product, Version
 
-
 class StyleFormMixin:
    def __init__(self, *args, **kwargs):
       super().__init__(*args, **kwargs)

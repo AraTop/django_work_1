@@ -1,12 +1,15 @@
 from django.forms import inlineformset_factory
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView , View, CreateView, UpdateView, DeleteView
 from main.forms import ProductForm, VersionForm
 from main.models import Blog, Product, Version
 from pytils.translit import slugify
-from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required
+
+from main.permissions import AuthorPermissionsMixin, ModeratorPermissionsMixin
 
 class ContactView(View):
    template_name = 'main/contacts.html'
@@ -82,24 +85,17 @@ class ProductCreateView(CreateView):
    form_class = ProductForm
    success_url = '/' 
 
-   def form_valid(self, form):
-      form.instance.user = self.request.user
-      return super().form_valid(form)
-
 @method_decorator(login_required, name='dispatch')
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(AuthorPermissionsMixin, DeleteView):
    model = Product
    success_url = '/' 
 
 @method_decorator(login_required, name='dispatch')
 class ProductListView(ListView):
    model = Product
-
-   def get_queryset(self):
-      return super().get_queryset().filter(user=self.request.user)
    
 @method_decorator(login_required, name='dispatch')
-class ProductDetailView(DetailView):
+class ProductDetailView(ModeratorPermissionsMixin, DetailView):
    model = Product
 
    def get_object(self, queryset=None):
@@ -108,11 +104,8 @@ class ProductDetailView(DetailView):
       self.object.save()
       return self.object
    
-   def get_queryset(self):
-      return super().get_queryset().filter(user=self.request.user)
-   
 @method_decorator(login_required, name='dispatch')   
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(ModeratorPermissionsMixin, UpdateView):
    model = Product
    form_class = ProductForm
    success_url = '/'
@@ -122,6 +115,16 @@ class ProductUpdateView(UpdateView):
 
    def get_context_data(self, **kwargs):
       context_data = super().get_context_data(**kwargs)
+      is_moder = self.request.user.groups.filter(name='moderator').exists()
+      is_owner = self.get_object().user == self.request.user
+      while True:
+         if is_owner:
+            break
+         
+         elif is_moder:
+            context_data['is_moderator'] = is_moder
+            break
+         
       VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
 
       if self.request.method == 'POST':
@@ -140,9 +143,6 @@ class ProductUpdateView(UpdateView):
          formset.save()
 
       return super().form_valid(form)
-
-   def get_queryset(self):
-      return super().get_queryset().filter(user=self.request.user)
    
 #----------------------------------------------------------------------
 @method_decorator(login_required, name='dispatch')

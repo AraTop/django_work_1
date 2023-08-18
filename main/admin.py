@@ -1,5 +1,8 @@
 from django.contrib import admin
 from main.models import Blog, Category, Product, Version
+from django.contrib.auth.models import Permission
+
+admin.site.register(Permission)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

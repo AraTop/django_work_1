@@ -28,6 +28,33 @@
                   </ul>
                </div>
                {% endif %}
+               {% if is_moderator %}
+               <!-- Поля доступные для модераторов -->
+                  <label class="control-label" for="inputError1">Описание</label>
+                  <input type="message" name="description" class="form-control" id="inputError1" value='{{ object.description }}'>
+                  <label class="control-label" for="inputWarning1">Категория</label>
+                  <input type="name" name="category" class="form-control" id="inputWarning1" value='{{ object.category }}'>
+                  <br>
+                  <label class="control-label mb-2" for="inputError1">Активен</label>
+                  <select name="is_active">
+                     <option value="True">Да</option>
+                     <option value="False">Нет</option>
+                 </select>
+                 <br>
+                 <label class="control-label" for="inputError1">Цена за покупку</label>
+                  <input type="number" name="purchase_price" value="{{ object.purchase_price }}" {% if is_moderator %}readonly{% endif %}>
+                  <br>
+                  <label class="control-label " for="inputError1">Дата создания</label>
+                  <input type="time" name="date_of_creation" value="{{ object.date_of_creation }}" readonly>
+                  <br>
+                  <label class="control-label" for="inputError1">Дата последнего изменения</label>
+                  <input type="time" name="last_modified_date" value="{{ object.last_modified_date }}" readonly>
+                  <br>
+                  <label class="control-label" for="inputSuccess1">Название</label>
+                  <input type="name" name="name" class="form-control" id="inputSuccess1" value="{{ object.name }}" readonly>
+                  <br>
+                  <input type="submit" class="btn btn-primary" id="inputError1">
+               {% else %}
                <div class="card-body">
                   <label class="control-label" for="inputSuccess1">Название</label>
                   <input type="name" name="name" class="form-control" id="inputSuccess1" value='{{ object.name }}'>
@@ -50,10 +77,14 @@
                   <label class="control-label" for="inputError1">Дата последнего изменения</label>
                   <input type="time" name="last_modified_date" value='{{ object.last_modified_date }}'>
                   <br>
-                  {{ form.user.label_tag }}: {{ request.user }}
+                  <label class="control-label" for="inputError1">Активен</label>
+                  <select name="is_active">
+                     <option value="True">Да</option>
+                     <option value="False">Нет</option>
+                 </select>
                   <br>
-                  <input type="hidden" name="{{ form.user.name }}" value="{{ request.user.id }}"
-                  <br>
+                 {{ form.user.label_tag }}: {{ request.user }}
+                 <br>
                   <input type="submit" class="btn btn-primary" id="inputError1">
                </div>  
             </div>   
@@ -77,6 +108,6 @@
       </div>
    </form>
 </div>
-
+{% endif %}
 
 {% endblock %} 
