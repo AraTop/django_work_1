@@ -7,21 +7,23 @@
                 <img src="{% mediapath object.preview.url %}" style="height: 225px; width: 100%; display: block;"/>
                 {% else %}
                 {% endif %} 
-                <div class="card-body">
-                  <p class="card-text">Название: {{object.name}}</p> 
-                  <p class="card-text">Описание: {{object.description|truncatechars:100}}</p>
-                  <p class="card-text">Цена: {{object.purchase_price}}</p>
-                  <p class="card-text">Категория: {{object.category}}</p> 
-                  <p class="card-text">Дата создания: {{object.date_of_creation}}</p> 
-                  <p class="card-text">Дата последнего изменения: {{object.last_modified_date}}</p>
-                  <p class="card-text">Просмотры: {{object.number_of_views}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/update/{{ object.pk }}/'">Edit</button>
-                      <button type="button" class="btn btn-danger" onclick="window.location.href='/delete/{{ object.pk }}/'">Delete</button>
+                {% for subject in subjects %}
+                  <div class="card-body">
+                    <p class="card-text">Название: {{subject.name}}</p> 
+                    <p class="card-text">Описание: {{subject.description|truncatechars:100}}</p>
+                    <p class="card-text">Цена: {{subject.purchase_price}}</p>
+                    <p class="card-text">Категория: {{subject.category}}</p> 
+                    <p class="card-text">Дата создания: {{subject.date_of_creation}}</p> 
+                    <p class="card-text">Дата последнего изменения: {{subject.last_modified_date}}</p>
+                    <p class="card-text">Просмотры: {{subject.number_of_views}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/update/{{ object.pk }}/'">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='/delete/{{ object.pk }}/'">Delete</button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
             {% for version in object.version.all %}

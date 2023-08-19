@@ -129,6 +129,7 @@ STATICFILES_DIRS = (
 )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
 SESSION_COOKIE_AGE = 10000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -146,3 +147,13 @@ EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 EMAIL_HOST_USER = 'test_django_project@rambler.ru'
 EMAIL_HOST_PASSWORD = 'Ara321ara' 
+
+CACHE_ENABLED = True
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default":{
+            "BACKEND":"django.core.cache.backends.redis.RedisCache",
+            "LOCATION":"redis://127.0.0.1:6379",
+        }
+    }

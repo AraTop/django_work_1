@@ -1,3 +1,5 @@
+from typing import Any, Dict
+from django.conf import settings
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse
@@ -8,7 +10,7 @@ from pytils.translit import slugify
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
-
+from django.core.cache import cache
 from main.permissions import AuthorPermissionsMixin, ModeratorPermissionsMixin
 
 class ContactView(View):
@@ -104,6 +106,20 @@ class ProductDetailView(ModeratorPermissionsMixin, DetailView):
       self.object.save()
       return self.object
    
+   def get_context_data(self, **kwargs):
+      context_data = super().get_context_data(**kwargs)
+      if settings.CACHE_ENABLED:
+         key = f'subject_list_{self.object.pk}'
+         subject_list = cache.get(key)
+         if subject_list is None:
+            subject_list = self.object_set.all()
+            cache.set(key, subject_list)
+      else:
+         subject_list = self.object_set.all()
+
+      context_data['subjects'] = subject_list
+      return context_data
+
 @method_decorator(login_required, name='dispatch')   
 class ProductUpdateView(ModeratorPermissionsMixin, UpdateView):
    model = Product
