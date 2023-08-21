@@ -9,11 +9,15 @@ class StyleFormMixin:
       
 
 class ProductForm(forms.ModelForm):
-    
+   
+   def __init__(self, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+      self.fields['user'].disabled = True
+
    class Meta:
       model = Product 
       fields = '__all__'
- 
+   
    def clean(self):
       cleaned_data = super().clean()
       name = cleaned_data.get('name')

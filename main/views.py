@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from main.permissions import AuthorPermissionsMixin, ModeratorPermissionsMixin
+from main.services import get_cached_subjects_for_product
 
 class ContactView(View):
    template_name = 'main/contacts.html'
@@ -105,18 +106,10 @@ class ProductDetailView(ModeratorPermissionsMixin, DetailView):
       self.object.number_of_views += 1
       self.object.save()
       return self.object
-   
+
    def get_context_data(self, **kwargs):
       context_data = super().get_context_data(**kwargs)
-      if settings.CACHE_ENABLED:
-         key = f'subject_list_{self.object.pk}'
-         subject_list = cache.get(key)
-         if subject_list is None:
-            subject_list = self.object_set.all()
-            cache.set(key, subject_list)
-      else:
-         subject_list = self.object_set.all()
-
+      subject_list = get_cached_subjects_for_product(self.object.pk)
       context_data['subjects'] = subject_list
       return context_data
 
