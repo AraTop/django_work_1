@@ -83,8 +83,16 @@
                      <option value="False">Нет</option>
                  </select>
                  <br>
-                  <input type="submit" class="btn btn-primary" id="inputError1">
-               </div>  
+                 <label class="required" for="id_user">User:</label>                             
+                  <div class="related-widget-wrapper" data-model-ref="пользователь">
+                     <select name="user" required id="id_user">
+                     <option value="">---------------------------</option>
+                     <option value="{{ user.pk }}">{{ user }}</option>
+                     </select>
+                  </div>  
+                  <br>
+               <input type="submit" class="btn btn-primary" id="inputError1">   
+              </div>
             </div>   
          </div>      
       </div>
