@@ -23,9 +23,6 @@ class RegisterView(CreateView):
       confirmation_url = self.request.build_absolute_uri(reverse_lazy('users:verify_email', args=[token]))
       self.object.email_confirmation_token = token
       self.object.save()
-      print("\n\n\n\n\n\n")
-      print(confirmation_url)
-      print("\n\n\n\n\n\n")
       send_mail(
          subject='Подтвердите ваш адрес электронной почты',
          message=f'Пожалуйста нажмите на следующую ссылку, чтобы подтвердить свой адрес электронной почты: {confirmation_url}',
@@ -57,17 +54,14 @@ def generate_new_password(request):
 
 @method_decorator(login_required, name='dispatch')  
 class VerifyEmail(TemplateView):
-
    def get(self, request, *args, **kwargs):
      print(request.user.email_confirmation_token)
      key = request.user.email_confirmation_token
      user = User.objects.filter(email_confirmation_token=key).first()
-     print(user)
      if user:
-         print('я тут')
          request.user.is_email_verified = True
          request.user.email_confirmation_token = None
          request.user.save()
+         return redirect('/') 
      else:
-         print("я теперь тут")
-         return redirect('/')
+         return 
